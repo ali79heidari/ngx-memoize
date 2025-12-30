@@ -1,0 +1,33 @@
+{
+  "name": "ngx-memoize",
+  "version": "1.0.0",
+  "description": "A customized decorator to memoize methods in Angular templates, preventing unnecessary re-execution. Supports Auto-Destroy and Zoneless.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+  "dist",
+  "README.md",
+  "LICENSE"
+],
+  "keywords": [
+    "angular",
+    "decorator",
+    "memoize",
+    "cache",
+    "performance",
+    "autodestroy"
+  ],
+  "author": "Ali Heidari <ali01heidari@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ali79heidari/ngx-memoize"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
