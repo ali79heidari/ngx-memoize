@@ -1,6 +1,6 @@
 {
   "name": "ngx-memoize",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A customized decorator to memoize methods in Angular templates, preventing unnecessary re-execution. Supports Auto-Destroy and Zoneless.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

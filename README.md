@@ -69,6 +69,46 @@ ngOnDestroy() {}
 
 ```
 
+### Comparison Strategies
+
+By default, the decorator compares arguments using **referential check**. This is very fast but might not detect changes inside objects if their reference hasn't changed. You can change this behavior using the `strategy` option.
+
+#### 1. Reference Strategy (Default)
+
+Fastest. Checks if arguments are exactly the same reference (`===`).
+
+- Ideal for primitives (string, number, boolean) or immutable objects.
+- **Usage**: `@Memoize()` or `@Memoize({ strategy: 'ref' })`
+
+#### 2. JSON Strategy (Deep Comparison)
+
+Slower but smarter. Converts arguments to a JSON string to detect changes within objects.
+
+- Ideal for mutable objects where you might change a property (e.g., `user.name = 'New'`) without creating a new object instance.
+- **Usage**: `@Memoize({ strategy: 'json' })`
+
+```typescript
+@Component({...})
+export class ChartComponent {
+  config = { title: "Old Title" };
+
+  @Memoize({ strategy: 'json' })
+  renderChart(config: any) {
+    // This will now re-run even if 'config' is the same object reference
+    // but its internal properties have changed.
+    console.log("Rendering chart with:", config.title);
+    return generateChart(config);
+  }
+
+  updateTitle() {
+    // Mutating object directly
+    this.config.title = "New Title";
+    // With 'json' strategy, calling renderChart(this.config)
+    // WILL trigger a re-calculation.
+  }
+}
+```
+
 ### Manual Control & Disabling Auto-Destroy
 
 In some cases, you might want to disable automatic cleanup (e.g., in a Singleton Service that never destroys) or you need to clear the cache manually while the component is still alive.
